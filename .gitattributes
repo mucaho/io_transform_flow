@@ -1,0 +1,15 @@
+[attr]whitespace2 whitespace=tabwidth=2,tab-in-indent,-indent-with-non-tab,space-before-tab,trailing-space,blank-at-eol,-cr-at-eol,blank-at-eof
+[attr]whitespace4 whitespace=tabwidth=4,tab-in-indent,-indent-with-non-tab,space-before-tab,trailing-space,blank-at-eol,-cr-at-eol,blank-at-eof
+
+* text=auto
+
+# ruby
+*.rb            text diff=ruby whitespace2
+*.rbs           text diff=ruby whitespace2
+*_spec.rb       text diff=rspec whitespace2
+
+# config
+Rakefile        text diff=ruby whitespace2
+Gemfile         text diff=ruby whitespace2
+*.sh            text diff=bash whitespace2
+

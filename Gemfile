@@ -3,10 +3,22 @@
 source "https://rubygems.org"
 
 # Specify your gem's dependencies in parser.gemspec
-gemspec
+# gemspec # TODO: uncomment
 
-gem "rake", "~> 13.0"
+gem "rake", require: false
 
-gem "rspec", "~> 3.0"
+gem "aruba", require: false
+gem "rspec", require: false
+gem "rubocop", require: false
+gem "rubocop-rake", require: false
+gem "rubocop-require_tools", require: false
+gem "rubocop-rspec", require: false
+gem "solargraph", require: false
+# TODO: add steep
 
-gem "rubocop", "~> 1.21"
+gem "debug", require: false
+gem "rbs", require: false
+gem "sord", require: false
+gem "yard", require: false
+gem "yard-junk", require: false
+# TODO: add yardstick and yard-spellcheck

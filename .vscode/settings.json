@@ -1,0 +1,38 @@
+{
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredLightColorTheme": "Default Light+",
+    "workbench.preferredDarkColorTheme": "Default Dark+",
+    "editor.renderControlCharacters": true,
+    "editor.renderLineHighlight": "all",
+    "editor.renderWhitespace": "boundary",
+    "editor.cursorWidth": 2,
+    "editor.snippetSuggestions": "bottom",
+    "files.autoSave": "off",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+
+    "ruby.codeCompletion": "rcodetools",
+    "ruby.intellisense": "rubyLocate",
+    "ruby.useBundler": true,
+    "ruby.lint": {
+        "rubocop": {
+            "useBundler": true
+        }
+    },
+    "ruby.format": "rubocop",
+    "rdbg.useBundler": true,
+    "solargraph.diagnostics": true,
+    "solargraph.formatting": true,
+    "solargraph.useBundler": true,
+    "ruby.rubocop.useBundler": true,
+    "yard.tags.author": false,
+    "yard.tags.paramNameBeforeType": true,
+    "yard.spacers.beforeDescription": false,
+    "yard.spacers.afterDescription": false,
+    "yard.spacers.beforeSingleTag": false,
+    "yard.spacers.afterSingleTag": false,
+    "yard.spacers.beforeTags": false,
+    "yard.spacers.afterTags": false,
+    "yard.spacers.separateTags": false,
+}

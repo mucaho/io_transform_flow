@@ -1,0 +1,11 @@
+--fail-on-warning
+--no-private
+--no-api private
+--default-return void
+--embed-mixins
+--embed-mixin ClassMethods
+--plugin junk
+lib/**/*.rb
+-
+README.md
+LICENSE.txt

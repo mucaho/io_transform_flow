@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "gracefulpotato.rbs-syntax",
+        "rebornix.ruby",
+        "castwide.solargraph",
+        "misogi.ruby-rubocop",
+        "koichisasada.vscode-rdbg",
+        "wingrunr21.vscode-ruby",
+        "pavlitsky.yard"
+    ]
+}

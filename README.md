@@ -1,8 +1,8 @@
 # Parser
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/parser`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Simple Ruby parser that takes logs of URL paths and sorts them by their access count.
+Exposes an [executable binary](exe/parser.rb) and an [API surface](lib/parser.rb).
+Can be extended to express custom transformations from source to output files.
 
 ## Installation
 
@@ -22,17 +22,87 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### CLI
+
+```sh
+$ exe/parser.rb -h
+Usage: parser.rb [options] [file0, [file1, ...]]
+
+If no input file(s) are given, input will be read from STDIN.
+
+Common options:
+    -o, --output file                Specify output file. If omitted, prints to STDOUT.
+    -h, --help                       Show this message
+    -v, --version                    Show version
+```
+
+### [API using custom transformation](example/custom_api.rb)
+
+```ruby
+require "parser/domain"
+require "stringio"
+
+source = StringIO.new("Hello\nWorld!\n")
+destination = StringIO.new
+
+Parser::Domain::Process.process!(source, destination, ->(lines) { lines.map(&:chomp).map(&:reverse) })
+puts destination.string
+# prints:
+# olleH
+# !dlroW
+```
+
+### [API using default transformation](example/default_api.rb)
+
+```ruby
+require "parser/domain"
+require "parser/impl"
+require "stringio"
+
+source = StringIO.new("/about\n/home\n/home\n")
+destination = StringIO.new
+
+Parser::Domain::Process.process!(source, destination, Parser::Impl::CountURIsPipe)
+puts destination.string
+# prints:
+# /home 2
+# /about 1
+```
+
+## Tests
+
+This project is automatically checked by GitHub's continuous integration server.
+Example logs can be found in commit statuses.
+The CI process executes, in order:
+
+1. [Rubocop](https://github.com/rubocop/rubocop) lints
+2. [Solargraph](https://solargraph.org/) typechecking
+3. [RSpec](https://rspec.info/) [unit tests](spec/parser/impl/count_uris_pipe_spec.rb)
+4. [Cucumber](https://cucumber.io/) / [Aruba](https://github.com/cucumber/aruba) [CLI acceptance tests](features/parser_cli.feature)
+5. [Yard-junk](https://github.com/zverok/yard-junk) documentation lints
+
+## Signatures
+
+This gem ships with a [`RBS` type signature](sig/parser.rbs) located in the `sig/` folder.
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies.
+
+Then run `rake -T` to list all available tasks and their descriptions.
+For example, run `rake` (the default task) to run the tests.
+You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+## IDE support
+
+Users of [VSCode](https://code.visualstudio.com/) will have appropriate extensions auto-suggested when they open this project in their editor, which offer additional code completion suggestions and pallete commands.
+[Nix](https://nixos.org/) users can run `$ nix-shell` from this project's root directory to set up a reproducible development environment.
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/parser. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/parser/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/mucaho/parser. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://bundler.io/conduct.html).
 
 ## License
 
@@ -40,4 +110,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Parser project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/parser/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Parser project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://bundler.io/conduct.html).

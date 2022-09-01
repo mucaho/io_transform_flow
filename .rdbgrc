@@ -1,0 +1,2 @@
+config set use_short_path true
+config set postmortem true
