@@ -2,7 +2,7 @@
 
 require "rspec"
 require "stringio"
-require_relative "../../lib/parser/impl"
+require_relative "../../lib/io_transform_flow/impl"
 
 RSpec.shared_examples "a process" do |process_subject|
   subject(:process) { process_subject }
@@ -28,7 +28,7 @@ RSpec.shared_examples "a process" do |process_subject|
     { original:, spy: }
   end
   let(:transform) do
-    original = Parser::Domain::Pipe
+    original = IOTransformFlow::Domain::Pipe
     spy = object_spy(original, "transform")
 
     allow(spy)

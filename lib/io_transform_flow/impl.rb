@@ -2,14 +2,14 @@
 
 require_relative "domain"
 
-module Parser
+module IOTransformFlow
   # Namespace module for implementations of abstract domain concepts from the library
   module Impl
     # Example transformation
     module CountURIsPipe
-      extend Parser::Domain::Pipe
+      extend IOTransformFlow::Domain::Pipe
 
-      # (see Parser::Domain::Pipe#transform)
+      # (see IOTransformFlow::Domain::Pipe#transform)
       #
       # This transformation scans each +String+ line and
       # builds an ordered map between URI paths and their occurence count,

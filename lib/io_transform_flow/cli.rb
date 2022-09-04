@@ -4,11 +4,11 @@ require "optparse"
 require_relative "domain"
 require_relative "impl"
 
-module Parser
+module IOTransformFlow
   # CLI that serves as the entry point of the application, if called from a terminal
   module CLI
     # Extract given command line options and
-    # {Parser::Domain::Process.process! process!} {ARGF}[https://ruby-doc.org/core-3.1.2/ARGF.html]
+    # {IOTransformFlow::Domain::Process.process! process!} {ARGF}[https://ruby-doc.org/core-3.1.2/ARGF.html]
     # to {$stdout}[https://docs.ruby-lang.org/en/3.0/globals_rdoc.html] or the given output file
     # @return [void] nothing
     def self.parse!
@@ -21,7 +21,7 @@ module Parser
     # @return [OptionParser]
     private_class_method def self.create_parser(options)
       OptionParser.new do |parser|
-        parser.banner = "Usage: parser.rb [options] [file0, [file1, ...]]"
+        parser.banner = "Usage: io_transform_flow.rb [options] [file0, [file1, ...]]"
         parser.separator ""
         parser.separator "If no input file(s) are given, input will be read from STDIN."
         parser.separator ""
@@ -37,7 +37,7 @@ module Parser
         end
 
         parser.on_tail("-v", "--version", "Show version") do
-          puts Parser::VERSION
+          puts IOTransformFlow::VERSION
           exit
         end
       end
@@ -57,7 +57,7 @@ module Parser
         original_stdout = $stdout
         $stdout = output.nil? ? $stdout : File.open(output, "w")
 
-        Parser::Domain::Process.process!(ARGF, $stdout, Parser::Impl::CountURIsPipe)
+        IOTransformFlow::Domain::Process.process!(ARGF, $stdout, IOTransformFlow::Impl::CountURIsPipe)
       ensure
         unless $stdout.equal?(original_stdout)
           redirected_stdout = $stdout

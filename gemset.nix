@@ -413,6 +413,16 @@
     };
     version = "2.6.0";
   };
+  redcarpet = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0bvk8yyns5s1ls437z719y5sdv9fr8kfs8dmr6g8s761dv5n8zvi";
+      type = "gem";
+    };
+    version = "3.5.1";
+  };
   regexp_parser = {
     groups = ["default"];
     platforms = [];

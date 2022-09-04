@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    io_transform_flow (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -155,6 +160,7 @@ PLATFORMS
 DEPENDENCIES
   aruba
   debug
+  io_transform_flow!
   rake
   rbs
   rspec

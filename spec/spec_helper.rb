@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "parser"
+require "io_transform_flow"
 require "rspec"
 
 Dir["./spec/support/**/*.rb"].each { |f| require f }

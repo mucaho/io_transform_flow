@@ -2,7 +2,7 @@
 
 require "uri"
 
-module Parser
+module IOTransformFlow
   # Namespace module for domain concepts used in the library
   module Domain
     # Domain module that models the process of transforming things from a source to a destination resource,
@@ -24,7 +24,7 @@ module Parser
       end
     end
 
-    # Domain module that models the actual transformation of a {Parser::Domain::Process Process}.
+    # Domain module that models the actual transformation of a {IOTransformFlow::Domain::Process Process}.
     # This module implements the identity {#transform}.
     #
     # Module and stateless Class implementors should extend this module

@@ -2,8 +2,8 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in parser.gemspec
-# gemspec # TODO: uncomment
+# Specify your gem's dependencies in io_transform_flow.gemspec
+gemspec
 
 gem "rake", require: false
 
@@ -18,6 +18,7 @@ gem "solargraph", require: false
 
 gem "debug", require: false
 gem "rbs", require: false
+gem "redcarpet", require: false
 gem "sord", require: false
 gem "yard", require: false
 gem "yard-junk", require: false
