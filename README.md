@@ -1,7 +1,15 @@
-# Parser
+<!--
+# @markup markdown
+# @title IOTransformFlow - Simple transform flows between source and destination IO in Ruby
+# @author mucaho
+-->
 
-Simple Ruby parser that takes logs of URL paths and sorts them by their access count.
-Exposes an [executable binary](exe/parser.rb) and an [API surface](lib/parser.rb).
+# IOTransformFlow
+
+Simple transform flows between source and destination IO in Ruby.
+
+Exposes an [executable binary](exe/io_transform_flow.rb) and an [API surface](lib/io_transform_flow.rb).
+Default implementation takes logs of URL paths and sorts them by their access count.
 Can be extended to express custom transformations from source to output files.
 
 ## Installation
@@ -9,7 +17,7 @@ Can be extended to express custom transformations from source to output files.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'parser'
+gem 'io_transform_flow'
 ```
 
 And then execute:
@@ -18,15 +26,15 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install parser
+    $ gem install io_transform_flow
 
 ## Usage
 
 ### CLI
 
 ```sh
-$ exe/parser.rb -h
-Usage: parser.rb [options] [file0, [file1, ...]]
+$ exe/io_transform_flow.rb -h
+Usage: io_transform_flow.rb [options] [file0, [file1, ...]]
 
 If no input file(s) are given, input will be read from STDIN.
 
@@ -39,13 +47,13 @@ Common options:
 ### [API using custom transformation](example/custom_api.rb)
 
 ```ruby
-require "parser/domain"
+require "io_transform_flow/domain"
 require "stringio"
 
 source = StringIO.new("Hello\nWorld!\n")
 destination = StringIO.new
 
-Parser::Domain::Process.process!(source, destination, ->(lines) { lines.map(&:chomp).map(&:reverse) })
+IOTransformFlow::Domain::Process.process!(source, destination, ->(lines) { lines.map(&:chomp).map(&:reverse) })
 puts destination.string
 # prints:
 # olleH
@@ -55,14 +63,14 @@ puts destination.string
 ### [API using default transformation](example/default_api.rb)
 
 ```ruby
-require "parser/domain"
-require "parser/impl"
+require "io_transform_flow/domain"
+require "io_transform_flow/impl"
 require "stringio"
 
 source = StringIO.new("/about\n/home\n/home\n")
 destination = StringIO.new
 
-Parser::Domain::Process.process!(source, destination, Parser::Impl::CountURIsPipe)
+IOTransformFlow::Domain::Process.process!(source, destination, IOTransformFlow::Impl::CountURIsPipe)
 puts destination.string
 # prints:
 # /home 2
@@ -77,13 +85,13 @@ The CI process executes, in order:
 
 1. [Rubocop](https://github.com/rubocop/rubocop) lints
 2. [Solargraph](https://solargraph.org/) typechecking
-3. [RSpec](https://rspec.info/) [unit tests](spec/parser/impl/count_uris_pipe_spec.rb)
-4. [Cucumber](https://cucumber.io/) / [Aruba](https://github.com/cucumber/aruba) [CLI acceptance tests](features/parser_cli.feature)
+3. [RSpec](https://rspec.info/) [unit tests](spec/io_transform_flow/impl/count_uris_pipe_spec.rb)
+4. [Cucumber](https://cucumber.io/) / [Aruba](https://github.com/cucumber/aruba) [CLI acceptance tests](features/io_transform_flow_cli.feature)
 5. [Yard-junk](https://github.com/zverok/yard-junk) documentation lints
 
 ## Signatures
 
-This gem ships with a [`RBS` type signature](sig/parser.rbs) located in the `sig/` folder.
+This gem ships with a [`RBS` type signature](sig/io_transform_flow.rbs) located in the `sig/` folder.
 
 ## Development
 
@@ -102,7 +110,7 @@ Users of [VSCode](https://code.visualstudio.com/) will have appropriate extensio
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/mucaho/parser. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://bundler.io/conduct.html).
+Bug reports and pull requests are welcome on GitHub at https://github.com/mucaho/io_transform_flow. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://bundler.io/conduct.html).
 
 ## License
 
@@ -110,4 +118,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Parser project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://bundler.io/conduct.html).
+Everyone interacting in the IOTransformFlow project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://bundler.io/conduct.html).

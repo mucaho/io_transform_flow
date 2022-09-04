@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require "rspec"
-require_relative "../../../lib/parser/impl"
+require_relative "../../../lib/io_transform_flow/impl"
 
-RSpec.describe Parser::Impl::CountURIsPipe do # rubocop:disable RSpec/FilePath
+RSpec.describe IOTransformFlow::Impl::CountURIsPipe do # rubocop:disable RSpec/FilePath
   include_examples "a pipe", described_class
 
   context "when transforming data from source to destination" do

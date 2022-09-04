@@ -43,6 +43,7 @@ namespace "dev" do # rubocop:disable Metrics/BlockLength
 
     desc "Install RBS files for gems used in development"
     task :rbs do
+      sh "bundle exec rbs collection clean"
       sh "bundle exec rbs collection install"
     end
 
@@ -58,26 +59,33 @@ namespace "dev" do # rubocop:disable Metrics/BlockLength
   namespace "build" do
     desc "Generate YARD documentation"
     task :doc do
+      sh "ruby " \
+         "-e 'require \"fileutils\"' " \
+         "-e 'FileUtils.remove_dir \"./doc/\", force: true'"
       sh "bundle exec yard doc"
     end
 
     desc "Generated RBS signature from source file"
-    task :rbs do
-      sh "bundle exec sord lib/parser.rbs"
+    task :rbs_gen do
+      sh "bundle exec sord --no-regenerate lib/io_transform_flow.rbs"
     end
 
     desc "Move SORD's generated signature file to sig/ folder (OVERWRITES EXISTING SIG FILE!)"
-    file "move_rbs" do
-      sh "mv lib/parser.rbs sig/parser.rbs --force"
+    task :rbs_mv do
+      sh "ruby " \
+         "-e 'require \"fileutils\"' " \
+         "-e 'FileUtils.move \"./lib/io_transform_flow.rbs\", \"./sig/io_transform_flow.rbs\", force: true'"
     end
 
     # TODO: doc server
 
-    task all: %w[dev:build:doc_parse dev:build:doc_check dev:build:doc dev:build:rbs dev:build:move_rbs]
+    task all: %w[dev:build:doc_parse dev:build:doc_check dev:build:doc dev:build:rbs_gen dev:build:rbs_mv]
   end
 end
 
 desc "Run default tasks (test)"
 task default: %w[test:default]
+
+# TODO: add generated docs to CI process, as they are needed for typechecks
 
 # TODO: add "run" task

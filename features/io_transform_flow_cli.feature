@@ -1,29 +1,29 @@
-Feature: Use the parser CLI
+Feature: Use the io_transform_flow CLI
 
   I want to parse webserver logs,
-  and I want to use the provided parser CLI for it.
+  and I want to use the provided io_transform_flow CLI for it.
 
   Scenario: Get a help message to orient myself
-    Given an executable named "bin/parser" with:
+    Given an executable named "bin/io_transform_flow" with:
     """
     #!/usr/bin/env ruby
-    require_relative "../../../exe/parser.rb"
+    require_relative "../../../exe/io_transform_flow.rb"
     """
     And I look for executables in "bin" within the current directory
-    When I successfully run `parser --help`
+    When I successfully run `io_transform_flow --help`
     Then the output should contain:
     """
-    Usage: parser
+    Usage: io_transform_flow
     """
 
   Scenario: Get the current version
-    Given an executable named "bin/parser" with:
+    Given an executable named "bin/io_transform_flow" with:
     """
     #!/usr/bin/env ruby
-    require_relative "../../../exe/parser.rb"
+    require_relative "../../../exe/io_transform_flow.rb"
     """
     And I look for executables in "bin" within the current directory
-    When I successfully run `parser --version`
+    When I successfully run `io_transform_flow --version`
     Then the output should contain exactly:
     """
     0.1.0
@@ -41,13 +41,13 @@ Feature: Use the parser CLI
     /help
     /about
     """
-    And an executable named "bin/parser" with:
+    And an executable named "bin/io_transform_flow" with:
     """
     #!/usr/bin/env ruby
-    require_relative "../../../exe/parser.rb"
+    require_relative "../../../exe/io_transform_flow.rb"
     """
     And I look for executables in "bin" within the current directory
-    When I successfully run `parser webserver.log`
+    When I successfully run `io_transform_flow webserver.log`
     Then the output should contain exactly:
     """
     /about 3
@@ -74,13 +74,13 @@ Feature: Use the parser CLI
     """
     /index
     """
-    And an executable named "bin/parser" with:
+    And an executable named "bin/io_transform_flow" with:
     """
     #!/usr/bin/env ruby
-    require_relative "../../../exe/parser.rb"
+    require_relative "../../../exe/io_transform_flow.rb"
     """
     And I look for executables in "bin" within the current directory
-    When I successfully run `parser webserver2.log webserver1.log webserver3.log`
+    When I successfully run `io_transform_flow webserver2.log webserver1.log webserver3.log`
     Then the output should contain exactly:
     """
     /about 4
@@ -90,13 +90,13 @@ Feature: Use the parser CLI
     """
 
   Scenario: Sort URLs from STDIN by how often they were acessed
-    Given an executable named "bin/parser" with:
+    Given an executable named "bin/io_transform_flow" with:
     """
     #!/usr/bin/env ruby
-    require_relative "../../../exe/parser.rb"
+    require_relative "../../../exe/io_transform_flow.rb"
     """
     And I look for executables in "bin" within the current directory
-    When I run `parser` interactively
+    When I run `io_transform_flow` interactively
     And I type "/home"
     And I type "/about"
     And I type "/about"
@@ -114,13 +114,13 @@ Feature: Use the parser CLI
     /about
     /about
     """
-    And an executable named "bin/parser" with:
+    And an executable named "bin/io_transform_flow" with:
     """
     #!/usr/bin/env ruby
-    require_relative "../../../exe/parser.rb"
+    require_relative "../../../exe/io_transform_flow.rb"
     """
     And I look for executables in "bin" within the current directory
-    When I run `parser` interactively
+    When I run `io_transform_flow` interactively
     And I pipe in the file "webserver.log"
     Then the output should contain exactly:
     """
@@ -135,13 +135,13 @@ Feature: Use the parser CLI
     /about
     /about
     """
-    And an executable named "bin/parser" with:
+    And an executable named "bin/io_transform_flow" with:
     """
     #!/usr/bin/env ruby
-    require_relative "../../../exe/parser.rb"
+    require_relative "../../../exe/io_transform_flow.rb"
     """
     And I look for executables in "bin" within the current directory
-    When I successfully run `parser webserver.log -o sorted.log`
+    When I successfully run `io_transform_flow webserver.log -o sorted.log`
     Then the file "sorted.log" should contain exactly:
     """
     /about 2

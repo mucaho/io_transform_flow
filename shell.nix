@@ -6,7 +6,7 @@ let
   ruby = pkgs.${rubyPackageName};
 
   gems = pkgs.bundlerEnv {
-    name = "simple_ruby_parser";
+    name = "io_transform_flow";
     gemdir = ./.;
     inherit ruby;
   };

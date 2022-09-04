@@ -1,0 +1,135 @@
+# Root namespace module for the library.
+module IOTransformFlow
+  VERSION: String
+
+  # CLI that serves as the entry point of the application, if called from a terminal
+  module CLI
+    # Extract given command line options and
+    # {IOTransformFlow::Domain::Process.process! process!} {ARGF}[https://ruby-doc.org/core-3.1.2/ARGF.html]
+    # to {$stdout}[https://docs.ruby-lang.org/en/3.0/globals_rdoc.html] or the given output file
+    #
+    # _@return_ — nothing
+    def self.parse!: () -> void
+
+    # _@param_ `options`
+    def self.create_parser: (::Hash[untyped, untyped] options) -> OptionParser
+
+    # _@param_ `options`
+    def self.run_parser!: (::Hash[untyped, untyped] options) -> void
+  end
+
+  # Namespace module for implementations of abstract domain concepts from the library
+  module Impl
+    # Example transformation
+    module CountURIsPipe
+      extend IOTransformFlow::Domain::Pipe
+
+      # sord duck - #to_enum looks like a duck type, replacing with untyped
+      # sord duck - #to_enum looks like a duck type, replacing with untyped
+      # Transform an {Enumerator}[https://ruby-doc.org/core/Enumerator.html] to another
+      # {Enumerator}[https://ruby-doc.org/core/Enumerator.html].
+      #
+      # This transformation scans each +String+ line and
+      # builds an ordered map between URI paths and their occurence count,
+      # with each +String+ entry of the form +URI_path count+,
+      # sorted by that count in descending order.
+      #
+      # It tries to extract a
+      # {URI path component}[https://ruby-doc.org/stdlib-2.5.1/libdoc/uri/rdoc/URI.html#method-c-split-label-Synopsis]
+      # from the first word encountered in each (conceptual) line.
+      # Otherwise, the line is ignored from the result.
+      #
+      # _@param_ `source` — object responding to +:to_enum+
+      #
+      # _@param_ `source` — object responding to +:to_enum+
+      #
+      # _@return_ — object responding to +:to_enum+
+      #
+      # _@return_ — an enumeratorable (+:to_enum+) sorted collection of +String+s
+      def self.transform: (untyped source) -> untyped
+
+      # sord duck - #to_enum looks like a duck type, replacing with untyped
+      # _@param_ `source`
+      def self.reduce_to_bag: (untyped source) -> ::Hash[untyped, untyped]
+
+      # _@param_ `line`
+      def self.extract_path: (String line) -> String?
+
+      # sord duck - #to_enum looks like a duck type, replacing with untyped
+      # _@param_ `bag`
+      def self.format_bag: (::Hash[untyped, untyped] bag) -> untyped
+
+      # Convert +self+ to a {Proc}[https://ruby-doc.org/core-3.1.2/Proc.html]
+      # having the signature of {#transform}.
+      #
+      # _@return_ — +self+ as a callable +Proc+
+      def self.to_proc: () -> Proc
+    end
+  end
+
+  # Namespace module for domain concepts used in the library
+  module Domain
+    # Domain module that models the process of transforming things from a source to a destination resource,
+    # conceptually line by line.
+    module Process
+      # sord duck - #each_line looks like a duck type, replacing with untyped
+      # sord duck - #puts looks like a duck type, replacing with untyped
+      # sord duck - #to_proc looks like a duck type, replacing with untyped
+      # Process the given source {IO}[https://ruby-doc.org/core/IO.html] using the given +transform+,
+      # by writing the obtained transformation output to given destination
+      # {IO}[https://ruby-doc.org/core/IO.html].
+      #
+      # _@param_ `source` — object responding to +:each_line+
+      #
+      # _@param_ `destination` — object responding to +:puts+
+      #
+      # _@param_ `transform` — object responding to +:to_proc+
+      #
+      # _@return_ — nothing
+      def self.process!: (untyped source, untyped destination, untyped transform) -> void
+    end
+
+    # Domain module that models the actual transformation of a {IOTransformFlow::Domain::Process Process}.
+    # This module implements the identity {#transform}.
+    #
+    # Module and stateless Class implementors should extend this module
+    # to offer a custom {#transform self.transform} class method implementation.
+    # Stateful Class implementors should include this module
+    # to offer a custom {#transform transform} instance method implementation.
+    module Pipe
+      extend IOTransformFlow::Domain::Pipe
+
+      # sord duck - #to_enum looks like a duck type, replacing with untyped
+      # sord duck - #to_enum looks like a duck type, replacing with untyped
+      # Transform an {Enumerator}[https://ruby-doc.org/core/Enumerator.html] to another
+      # {Enumerator}[https://ruby-doc.org/core/Enumerator.html].
+      #
+      # _@param_ `source` — object responding to +:to_enum+
+      #
+      # _@return_ — object responding to +:to_enum+
+      def transform: (untyped source) -> untyped
+
+      # Convert +self+ to a {Proc}[https://ruby-doc.org/core-3.1.2/Proc.html]
+      # having the signature of {#transform}.
+      #
+      # _@return_ — +self+ as a callable +Proc+
+      def to_proc: () -> Proc
+
+      # sord duck - #to_enum looks like a duck type, replacing with untyped
+      # sord duck - #to_enum looks like a duck type, replacing with untyped
+      # Transform an {Enumerator}[https://ruby-doc.org/core/Enumerator.html] to another
+      # {Enumerator}[https://ruby-doc.org/core/Enumerator.html].
+      #
+      # _@param_ `source` — object responding to +:to_enum+
+      #
+      # _@return_ — object responding to +:to_enum+
+      def self.transform: (untyped source) -> untyped
+
+      # Convert +self+ to a {Proc}[https://ruby-doc.org/core-3.1.2/Proc.html]
+      # having the signature of {#transform}.
+      #
+      # _@return_ — +self+ as a callable +Proc+
+      def self.to_proc: () -> Proc
+    end
+  end
+end

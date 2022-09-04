@@ -1,23 +1,27 @@
 # frozen_string_literal: true
 
-require_relative "lib/parser/version"
+require_relative "lib/io_transform_flow/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "parser"
-  spec.version = Parser::VERSION
+  spec.name = "io_transform_flow"
+  spec.version = IOTransformFlow::VERSION
   spec.authors = ["mucaho"]
   spec.email = ["mucaho@gmail.com"]
 
-  spec.summary = "Simple parser in ruby for an assignment of performing a reduce operation on a file"
-  spec.homepage = "https://github.com/mucaho/simple_ruby_parser"
+  spec.summary = "Simple transform flows between source and destionation IO in Ruby."
+  spec.description = "Simple transform flows between source and destination IO in Ruby." \
+                     "Exposes an executable binary and an API surface. " \
+                     "Default implementation takes logs of URL paths and sorts them by their access count." \
+                     "Can be extended to express custom transformations from source to output files."
+  spec.homepage = "https://github.com/mucaho/io_transform_flowr"
   spec.license = "MIT"
   spec.required_ruby_version = ">= #{File.read(".ruby-version").split(".").first}"
 
   spec.metadata["allowed_push_host"] = "https://github.com/"
   spec.metadata["rubygems_mfa_required"] = "true"
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/mucaho/simple_ruby_parser"
-  spec.metadata["changelog_uri"] = "https://github.com/mucaho/simple_ruby_parser/releases"
+  spec.metadata["source_code_uri"] = "https://github.com/mucaho/io_transform_flow"
+  spec.metadata["changelog_uri"] = "https://github.com/mucaho/io_transform_flow/releases"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

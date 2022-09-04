@@ -11,10 +11,14 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: e920cbaa517738b75f3b1e70223a0e51da80d5aa
+    revision: 07bd495405505155ec96791aba61acd9190ec00a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: benchmark
+  version: '0'
+  source:
+    type: stdlib
+- name: io-console
   version: '0'
   source:
     type: stdlib
@@ -27,7 +31,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: e920cbaa517738b75f3b1e70223a0e51da80d5aa
+    revision: 07bd495405505155ec96791aba61acd9190ec00a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: parallel
@@ -35,7 +39,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: e920cbaa517738b75f3b1e70223a0e51da80d5aa
+    revision: 07bd495405505155ec96791aba61acd9190ec00a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rainbow
@@ -43,6 +47,6 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: e920cbaa517738b75f3b1e70223a0e51da80d5aa
+    revision: 07bd495405505155ec96791aba61acd9190ec00a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
