@@ -3,6 +3,7 @@
 require "optparse"
 require_relative "domain"
 require_relative "impl"
+require_relative "version"
 
 module IOTransformFlow
   # CLI that serves as the entry point of the application, if called from a terminal

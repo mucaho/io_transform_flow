@@ -97,6 +97,43 @@ RSpec.shared_examples "a process" do |process_subject|
 
         expect(destination[:original]).to eq(source[:original])
       end
+
+      it "then it works with a custom transformation", :aggregate_failures do
+        source[:original].push("Hello", "World")
+
+        process.process!(source[:spy], destination[:spy], ->(lines) { lines.map(&:chomp).map(&:reverse) })
+
+        expect(source[:spy]).to have_received(:each_line).once
+        expect(destination[:spy]).to have_received(:puts).twice
+
+        expect(destination[:original]).to eq(%w[olleH dlroW])
+      end
+
+      it "then it works with a custom lazy transformation", :aggregate_failures, :timeoutable do
+        source[:original].push(0, 1)
+
+        process.process!(source[:spy], destination[:spy], ->(lines) { lines.lazy.map { |number| number + 1 } })
+
+        expect(source[:spy]).to have_received(:each_line).once
+        expect(destination[:spy]).to have_received(:puts).twice
+
+        expect(destination[:original]).to eq([1, 2])
+      end
+
+      it "then it works for an infinite (lazy) input", :aggregate_failures, :timeoutable do
+        source_original = (0..).to_enum
+        source_spy = object_spy(StringIO.new, "destination")
+        allow(source_spy)
+          .to receive(:each_line)
+          .and_invoke(source_original.method(:each))
+
+        process.process!(source_spy, destination[:spy], ->(lines) { lines.map(&:itself).take(100) })
+
+        expect(source_spy).to have_received(:each_line).once
+        expect(destination[:spy]).to have_received(:puts).exactly(100).times
+
+        expect(destination[:original]).to eq((0..99).to_a)
+      end
     end
   end
 end

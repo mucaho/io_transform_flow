@@ -18,7 +18,7 @@ module IOTransformFlow
       # @return [void] nothing
       # @raise [IOError] an {IOError}[https://ruby-doc.org/core/IOError.html] in case something goes wrong
       def self.process!(source, destination, transform)
-        transform.to_proc.call(source.each_line).to_enum.each do |line|
+        transform.to_proc.call(source.each_line.lazy).to_enum.each do |line|
           destination.puts(line)
         end
       end

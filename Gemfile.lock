@@ -82,6 +82,7 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     rbs (2.6.0)
+    redcarpet (3.5.1)
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -163,6 +164,7 @@ DEPENDENCIES
   io_transform_flow!
   rake
   rbs
+  redcarpet
   rspec
   rubocop
   rubocop-rake
