@@ -85,9 +85,10 @@ The CI process executes, in order:
 
 1. [Rubocop](https://github.com/rubocop/rubocop) lints
 2. [Solargraph](https://solargraph.org/) typechecking
-3. [RSpec](https://rspec.info/) [unit tests](spec/io_transform_flow/impl/count_uris_pipe_spec.rb)
-4. [Cucumber](https://cucumber.io/) / [Aruba](https://github.com/cucumber/aruba) [CLI acceptance tests](features/io_transform_flow_cli.feature)
-5. [Yard-junk](https://github.com/zverok/yard-junk) documentation lints
+3. [Steep](https://github.com/soutaro/steep) typechecking
+4. [RSpec](https://rspec.info/) [unit tests](spec/io_transform_flow/impl/count_uris_pipe_spec.rb)
+5. [Cucumber](https://cucumber.io/) / [Aruba](https://github.com/cucumber/aruba) [CLI acceptance tests](features/io_transform_flow_cli.feature)
+6. [Yard-junk](https://github.com/zverok/yard-junk) documentation lints
 
 ## Signatures
 
@@ -96,16 +97,16 @@ This gem ships with a [`RBS` type signature](sig/io_transform_flow.rbs) located 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies.
-
-Then run `rake -T` to list all available tasks and their descriptions.
-For example, run `rake` (the default task) to run the tests.
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+Run `rake -T` for a list of all available tasks and their descriptions.
+For example, run `rake` (the default task) to run the tests.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## IDE support
 
-Users of [VSCode](https://code.visualstudio.com/) will have appropriate extensions auto-suggested when they open this project in their editor, which offer additional code completion suggestions and pallete commands.
+Users of [VSCode](https://code.visualstudio.com/) will have appropriate extensions auto-suggested when they open this project in their editor, which offer additional code completion suggestions and palette commands.
 [Nix](https://nixos.org/) users can run `$ nix-shell` from this project's root directory to set up a reproducible development environment.
 
 ## Contributing

@@ -11,9 +11,9 @@ RSpec.describe IOTransformFlow::Impl::CountURIsPipe do # rubocop:disable RSpec/F
       throws = "then it throws an error"
 
       it "#{throws} given an Enumerator-like input not containing Strings" do
-        enumerator = Object.new
-        def enumerator.to_enum(...)
-          [1, 2, 3].to_enum(...)
+        enumerator = BasicObject.new
+        def enumerator.to_enum
+          [1, 2, 3].to_enum
         end
 
         expect { pipe.transform(enumerator) }.to raise_error(NoMethodError)

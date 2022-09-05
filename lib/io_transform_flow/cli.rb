@@ -18,7 +18,7 @@ module IOTransformFlow
       run_parser!(options)
     end
 
-    # @param options [Hash]
+    # @param options [Hash<Symbol, String?>]
     # @return [OptionParser]
     private_class_method def self.create_parser(options)
       OptionParser.new do |parser|
@@ -28,7 +28,7 @@ module IOTransformFlow
         parser.separator ""
         parser.separator "Common options:"
 
-        parser.on("-o", "--output file", String, "Specify output file. If omitted, prints to STDOUT.") do |o|
+        parser.on("-o", "--output file", "Specify output file. If omitted, prints to STDOUT.") do |o|
           options[:output] = o
         end
 
@@ -44,7 +44,7 @@ module IOTransformFlow
       end
     end
 
-    # @param options [Hash]
+    # @param options [Hash<Symbol, String?>]
     # @return [void]
     private_class_method def self.run_parser!(options)
       # @type [String, nil]

@@ -29,10 +29,10 @@ module IOTransformFlow
       end
 
       # @param source [#to_enum]
-      # @return [Hash]
+      # @return [Hash<String, Integer>]
       private_class_method def self.reduce_to_bag(source)
         # @param line [String]
-        # @param bag [Hash]
+        # @param bag [Hash<String, Integer>]
         source.to_enum.each_with_object({}) do |line, bag|
           path = extract_path(line)
           if path.nil?
@@ -55,7 +55,7 @@ module IOTransformFlow
         uri&.path
       end
 
-      # @param bag [Hash]
+      # @param bag [Hash<String, Integer>]
       # @return [#to_enum]
       private_class_method def self.format_bag(bag)
         bag.sort_by { |key, value| [value, key] }

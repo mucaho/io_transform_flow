@@ -13,3 +13,10 @@ gems:
   # It's unnecessary if you don't use rbs as a library.
   - name: rbs
     ignore: true
+  # Skip loading steep gem's RBS.
+  # It's unnecessary if you don't use steep as a library.
+  - name: steep
+    ignore: true
+  # Loading this gem's sigs leads to errors of duplicated declarations
+  - name: io_transform_flow
+    ignore: true

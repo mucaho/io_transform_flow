@@ -14,7 +14,7 @@ gem "rubocop-rake", require: false
 gem "rubocop-require_tools", require: false
 gem "rubocop-rspec", require: false
 gem "solargraph", require: false
-# TODO: add steep
+gem "steep", require: false
 
 gem "debug", require: false
 gem "rbs", require: false
@@ -22,4 +22,3 @@ gem "redcarpet", require: false
 gem "sord", require: false
 gem "yard", require: false
 gem "yard-junk", require: false
-# TODO: add yardstick and yard-spellcheck

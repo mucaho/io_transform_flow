@@ -49,7 +49,7 @@ module IOTransformFlow
       #
       # @return [Proc] +self+ as a callable +Proc+
       def to_proc
-        method(:transform)
+        method(:transform).to_proc
       end
     end
   end

@@ -68,6 +68,6 @@ in pkgs.mkShell {
     gems
     gems.wrappedRuby
     # VSCode and its extensions
-    vscode # TODO: add vscode tasks linking to rake tasks in workspace config `.vscode/launch.json`
+    vscode
   ];
 }

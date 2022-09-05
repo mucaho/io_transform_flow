@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "rake",
+            "task": "default",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "label": "rake: default"
+        },
+        {
+            "type": "rake",
+            "task": "dev:build:all",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "label": "rake: dev:build:all"
+        }
+    ]
+}

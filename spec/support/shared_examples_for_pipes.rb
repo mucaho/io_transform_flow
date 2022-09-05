@@ -28,9 +28,9 @@ RSpec.shared_examples "a pipe" do |subject_pipe|
 
     context "if called with valid inputs" do
       let(:enumerator) do
-        out = Object.new
-        def out.to_enum(...)
-          %w[a b c].to_enum(...)
+        out = BasicObject.new
+        def out.to_enum
+          %w[a b c].to_enum
         end
         out
       end

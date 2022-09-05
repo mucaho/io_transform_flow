@@ -24,5 +24,7 @@ jobs:
         # bundler-cache: true
     - name: Install dependencies
       run: bundle install
+    - name: Install test dependencies
+      run: bundle exec rake dev:install:rbs
     - name: Run the default task (test)
       run: bundle exec rake

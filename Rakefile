@@ -15,23 +15,25 @@ namespace "test" do
 
   RuboCop::RakeTask.new
 
-  desc "Run solargraph typechecking"
-  task :typecheck do
+  desc "Run solargraph typechecker"
+  task :typecheck_yard do
     sh "bundle exec solargraph typecheck --level=typed"
   end
 
-  desc "Parse YARD documentation"
-  task :doc_parse do
-    sh "bundle exec yard-junk --sanity"
+  desc "Run steep typechecker"
+  task :typecheck_rbs do
+    sh "bundle exec steep validate"
+    sh "bundle exec steep check --severity-level=hint"
   end
 
   desc "Validate YARD documentation"
   task :doc_check do
+    sh "bundle exec yard-junk --sanity"
     sh "bundle exec yard-junk"
   end
 
   desc "Run linter, typecheck, spec, features and doc checks"
-  task default: %i[rubocop typecheck spec features doc_parse doc_check]
+  task default: %i[rubocop typecheck_yard typecheck_rbs spec features doc_check]
 end
 
 namespace "dev" do # rubocop:disable Metrics/BlockLength
@@ -65,7 +67,12 @@ namespace "dev" do # rubocop:disable Metrics/BlockLength
       sh "bundle exec yard doc"
     end
 
-    desc "Generated RBS signature from source file"
+    desc "Serve YARD documentation"
+    task :doc_server do
+      sh "bundle exec yard server"
+    end
+
+    desc "Generated RBS signature from source files"
     task :rbs_gen do
       sh "bundle exec sord --no-regenerate lib/io_transform_flow.rbs"
     end
@@ -77,15 +84,21 @@ namespace "dev" do # rubocop:disable Metrics/BlockLength
          "-e 'FileUtils.move \"./lib/io_transform_flow.rbs\", \"./sig/io_transform_flow.rbs\", force: true'"
     end
 
-    # TODO: doc server
+    task all: %w[dev:build:doc dev:build:rbs_gen dev:build:rbs_mv]
+  end
+end
 
-    task all: %w[dev:build:doc_parse dev:build:doc_check dev:build:doc dev:build:rbs_gen dev:build:rbs_mv]
+namespace "example" do
+  desc "Run the customized API example"
+  task :run_custom do
+    sh "ruby example/custom_api.rb"
+  end
+
+  desc "Run the default API example"
+  task :run_default do
+    sh "ruby example/default_api.rb"
   end
 end
 
 desc "Run default tasks (test)"
 task default: %w[test:default]
-
-# TODO: add generated docs to CI process, as they are needed for typechecks
-
-# TODO: add "run" task
