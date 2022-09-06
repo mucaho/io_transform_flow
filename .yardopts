@@ -4,6 +4,7 @@
 --default-return void
 --embed-mixins
 --embed-mixin ClassMethods
+--embed-mixin InstanceMethods
 --plugin junk
 lib/**/*.rb
 -

@@ -3,17 +3,27 @@
 require "rake"
 
 require "bundler/gem_tasks"
-require "rspec/core/rake_task"
-require "cucumber/rake/task"
 
-namespace "test" do
+require "cucumber/rake/task"
+require "rspec/core/rake_task"
+require "rubocop/rake_task"
+
+namespace "test" do # rubocop:disable Metrics/BlockLength
+  RuboCop::RakeTask.new(:rubocop)
+
   RSpec::Core::RakeTask.new(:spec)
+
+  desc "Debug app unit tests"
+  task :debug_spec do
+    sh "rdbg -c -- bundle exec rake test:spec"
+  end
 
   Cucumber::Rake::Task.new(:features)
 
-  require "rubocop/rake_task"
-
-  RuboCop::RakeTask.new
+  desc "Debug app acceptance tests"
+  task :debug_features do
+    sh "rdbg -c -- bundle exec rake test:features"
+  end
 
   desc "Run solargraph typechecker"
   task :typecheck_yard do
@@ -89,14 +99,28 @@ namespace "dev" do # rubocop:disable Metrics/BlockLength
 end
 
 namespace "example" do
-  desc "Run the customized API example"
-  task :run_custom do
-    sh "ruby example/custom_api.rb"
+  namespace "custom" do
+    desc "Run the customized API example"
+    task :run do
+      ruby "example/custom_api.rb"
+    end
+
+    desc "Debug the customized API example"
+    task :debug do
+      sh "rdbg example/custom_api.rb"
+    end
   end
 
-  desc "Run the default API example"
-  task :run_default do
-    sh "ruby example/default_api.rb"
+  namespace "default" do
+    desc "Run the default API example"
+    task :run do
+      ruby "example/default_api.rb"
+    end
+
+    desc "Debug the default API example"
+    task :debug do
+      sh "rdbg example/default_api.rb"
+    end
   end
 end
 
